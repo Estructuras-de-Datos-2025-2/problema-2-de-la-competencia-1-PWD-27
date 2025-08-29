@@ -3,9 +3,31 @@
 int main(void)
 {
     int n;
-    scanf("%d",&n);
-    // TODO: malloc n, leer arreglo
-    // TODO: imprimir en orden inverso separados por espacio
-    // TODO: free
+    if (scanf("%d",&n)!=1) return 0;
+    int *a = (int*)malloc((size_t)n*sizeof(int));
+    if(!a) return 0;
+    for (int i = 0;i<n;++i){
+        if (scanf("%d",&a[i])!=1){free(a);return 0;
+        }
+    }
+
+    int*izq = a;
+    int*der = a+n-1;
+    while (izq<der){
+        int tmp = *izq;
+        *izq = *der;
+        *der = tmp;
+        ++izq;
+        --der;
+    }
+     
+    
+    for (int i = 0; i < n; ++i) {
+        if (i) putchar(' ');
+        printf("%d", a[i]);
+    }
+    putchar('\n' );
+
+    free(a);
     return 0;
 }
